@@ -10,11 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.80.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "csstype": "^3.0.10",
+    "goober": "^2.1.16",
     "lucide-react": "^0.513.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-fox-toast": "^1.10.20",
+    "react-router-dom": "^7.6.2",
     "tailwind-merge": "^3.3.0",
     "tailwindcss-animate": "^1.0.7"
   },
