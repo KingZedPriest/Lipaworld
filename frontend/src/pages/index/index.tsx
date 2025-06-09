@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 
 //Images
 import logo from "/logo.png";
+import logo1 from "/logo1.png";
 
 //Icons
 import { ArrowRight } from "lucide-react";
@@ -18,7 +19,7 @@ export default function HomePage() {
                 <main className="flex flex-col justify-center items-center py-20 md:py-32 text-center">
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mx-auto max-w-3xl">
                         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2, duration: 0.5 }} className="mb-8">
-                            <img src={logo} alt="Lipaworld Logo" />
+                            <img src={logo1} className="mx-auto h-16 md:h-20 xl:h-24" alt="Lipaworld Logo" />
                         </motion.div>
 
                         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="mb-6 font-bold text-brand-blue text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
@@ -32,9 +33,9 @@ export default function HomePage() {
 
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}>
                             <Link to="/gift">
-                                <Button size="lg" className="bg-gradient-to-r from-brand-green hover:from-brand-green/90 to-emerald-500 hover:to-emerald-500/90 shadow-lg px-8 py-6 font-semibold text-white text-sm md:text-base xl:text-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 transform">
+                                <Button size="lg" className="bg-gradient-to-r from-brand-green hover:from-brand-green/90 to-emerald-500 hover:to-emerald-500/90 shadow-lg px-8 py-4 font-semibold text-white text-sm md:text-base xl:text-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 transform">
                                     Gift a Voucher
-                                    <ArrowRight className="ml-2 w-5 h-5" />
+                                    <ArrowRight className="ml-2 size-5" />
                                 </Button>
                             </Link>
                         </motion.div>
@@ -44,7 +45,7 @@ export default function HomePage() {
                         {features.map((feature, index) => (
                             <motion.div key={feature.title} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.0 + index * 0.2, duration: 0.5 }} className="bg-white shadow-md hover:shadow-lg p-6 rounded-xl transition-shadow">
                                 <div className="flex justify-center items-center bg-brand-green/10 mb-4 p-3 rounded-full w-12 h-12">
-                                    <feature.icon className="w-6 h-6 text-brand-green" />
+                                    <feature.icon className="size-6 text-brand-green" />
                                 </div>
                                 <h3 className="mb-2 font-semibold text-brand-blue text-xl">{feature.title}</h3>
                                 <p className="text-slate-600">{feature.description}</p>
@@ -54,15 +55,14 @@ export default function HomePage() {
                 </main>
             </div>
 
-            {/* Footer */}
-            <footer className="bg-brand-blue mt-20 py-8 text-white">
+            <footer className="bg-brand-blue mt-20 py-4 text-white">
                 <div className="mx-auto px-4 container">
-                    <div className="flex md:flex-row flex-col justify-between items-center">
-                        <div className="mb-4 md:mb-0">
+                    <div className="flex justify-between items-center">
+                        <div>
                             <img src={logo} alt="Lipaworld logo" className="w-8" />
                         </div>
                         <div className="text-[10px] text-slate-300 md:text-xs xl:text-sm">
-                            <Copyright className="inline" /> {new Date().getFullYear()} Lipaworld Company. All rights reserved.
+                            <Copyright className="inline mb-0.5" size={20} /> {new Date().getFullYear()} Lipaworld Company. All rights reserved.
                         </div>
                     </div>
                 </div>
