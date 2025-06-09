@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 //Pages
 import Index from '@/pages/index';
-import Gift from '@/pages/gift';
+import Gift from '@/pages/voucher-gift';
 
 const AppRoutes = () => {
     return (
