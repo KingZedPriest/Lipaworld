@@ -1,9 +1,8 @@
+//Component
+import VoucherGiftForm from "./Form";
+
 const index = () => {
-    return ( 
-        <main>
-            
-        </main>
-     );
+    return <VoucherGiftForm />
 }
- 
+
 export default index;

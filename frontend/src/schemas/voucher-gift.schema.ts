@@ -39,6 +39,7 @@ export const voucherSchema = z
                 });
             }
 
+            //Added a 1,000 Constraint
             if (numValue > 10000) {
                 ctx.addIssue({
                     path: ["customAmount"],
@@ -50,10 +51,4 @@ export const voucherSchema = z
     });
 
 
-export type VoucherFormData = z.infer<typeof voucherSchema>
-
-export interface VoucherApiData {
-    recipient: string
-    amount: number
-    message?: string
-}
+export type VoucherFormData = z.infer<typeof voucherSchema>;
