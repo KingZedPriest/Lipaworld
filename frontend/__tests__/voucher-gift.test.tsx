@@ -6,7 +6,6 @@ import { useMutation } from "@tanstack/react-query";
 //Gift Voucher Form
 import VoucherGiftForm from "../src/pages/voucher-gift/Form"
 
-
 // Mock TanStack Query's useMutation
 vi.mock("@tanstack/react-query", async () => {
   const actual = await vi.importActual<any>("@tanstack/react-query")

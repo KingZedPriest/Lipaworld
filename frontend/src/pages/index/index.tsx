@@ -32,7 +32,7 @@ export default function HomePage() {
                         </motion.p>
 
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}>
-                            <Link to="/gift">
+                            <Link to="/gift" aria-label="Gift a Voucher">
                                 <Button size="lg" className="bg-gradient-to-r from-brand-green hover:from-brand-green/90 to-emerald-500 hover:to-emerald-500/90 shadow-lg px-8 py-4 font-semibold text-white text-sm md:text-base xl:text-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 transform">
                                     Gift a Voucher
                                     <ArrowRight className="ml-2 size-5" />
