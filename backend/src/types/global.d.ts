@@ -1,0 +1,6 @@
+declare type ApiResponse<T = any> = {
+    status: number;
+    success: boolean;
+    message: string;
+    data?: T;
+}
