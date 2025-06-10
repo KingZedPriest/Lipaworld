@@ -8,10 +8,12 @@ dotenv.config();
 const envSchema = z.object({
     PORT: z.coerce.number().default(3000),
     DEBUG_MODE: z.string().optional().default('false'),
+    AWS_REGION: z.string(),
+    AWS_DYNAMO_TABLE_NAME: z.string()
 });
 
 // Validate the environment variables
 const parsedEnv = envSchema.parse(process.env);
 
 // Export validated variables
-export const { PORT, DEBUG_MODE } = parsedEnv;
+export const { PORT, DEBUG_MODE, AWS_REGION, AWS_DYNAMO_TABLE_NAME } = parsedEnv;

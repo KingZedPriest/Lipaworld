@@ -1,6 +1,9 @@
 import Fastify, { FastifyInstance, FastifyRequest, FastifyReply, FastifyError } from 'fastify';
 import fastifyCors from '@fastify/cors';
 
+//Schemas
+import { generalSchema } from './schemas/general.schema';
+
 //Utils
 import { sendResponse } from './utils/response.utils';
 import { setupSwagger } from './utils/swagger';
@@ -19,6 +22,13 @@ export const buildApp = (): FastifyInstance => {
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
     })
+
+    // Register routes and schemas
+    for (const schema of [
+        ...generalSchema,
+    ]) { app.addSchema(schema) }
+
+    // app.register(userRoutes, { prefix: '/v1/api/users' });
 
     // Health Check Endpoint
     app.get('/healthcheck', async () => {
