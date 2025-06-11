@@ -16,6 +16,10 @@ export const setupSwagger = async (app: FastifyInstance) => {
                     url: 'http://localhost:3000',
                     description: 'Local server',
                 },
+                {
+                    url: 'https://lipaworld-backend-production.up.railway.app',
+                    description: 'Railway Server',
+                }
             ],
             tags: [
                 { name: 'Vouchers', description: 'Voucher-related endpoints' },
