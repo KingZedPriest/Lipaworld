@@ -4,12 +4,21 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { getVouchersByRecipient } from "../services/dynamodb.service";
 
 //Schemas
-import { GetRecipientVoucherInput } from "../schemas/giftVoucher.schema";
+import { GetRecipientVoucherInput, VoucherInput } from "../schemas/giftVoucher.schema";
 
 //Utilities
 import { sendResponse } from "../utils/response.utils";
 
+import { publishVoucherGift } from "../sqs/producer";
 
+//Git a Voucher
+export const giftVoucherHandler = async (request: FastifyRequest<{ Body: VoucherInput }>, reply: FastifyReply) => {
+    const gift = request.body;
+    await publishVoucherGift(gift);
+    return sendResponse(reply, 200, true, "Voucher queued successfully");
+};
+
+//Get a recipient vouchers
 export const getRecipientVoucherHandler = async (request: FastifyRequest<{ Querystring: GetRecipientVoucherInput }>, reply: FastifyReply) => {
 
     //Fetch Recipient

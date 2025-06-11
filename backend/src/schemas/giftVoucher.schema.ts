@@ -19,7 +19,7 @@ const giftVoucherSchema = z.object({
             (value) => emailRegex.test(value) || walletRegex.test(value),
             "Must be a valid email address or wallet address (0x...)"
         ),
-    amount: z.string().min(1, "Amount is required"),
+    amount: z.number().min(1, "Amount is required"),
     message: z.string().max(500, "Message cannot exceed 500 characters").optional(),
 })
 
@@ -50,6 +50,7 @@ const giftVoucherResponseSchema = responseCore({ status: 200, success: true }).e
 
 
 export type GetRecipientVoucherInput = z.infer<typeof getRecipientVoucherSchema>;
+export type VoucherInput = z.infer<typeof giftVoucherSchema>;
 
 
-export const { schemas: voucherSchema, $ref: voucherRef } = buildJsonSchemas({ getRecipientVoucherSchema, giftVoucherResponseSchema }, { $id: 'VoucherSchema' })
+export const { schemas: voucherSchema, $ref: voucherRef } = buildJsonSchemas({ giftVoucherSchema, getRecipientVoucherSchema, giftVoucherResponseSchema }, { $id: 'VoucherSchema' })
