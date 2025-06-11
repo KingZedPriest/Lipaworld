@@ -51,10 +51,14 @@ export default function VoucherGiftForm() {
     const onSubmit = async (data: VoucherFormData) => {
 
         setIsSubmitting(true)
-        if (!data.amount || !data.customAmount) return toast.error("Kindly enter an amount or select one.");
-        
+        const result = voucherSchema.safeParse(data);
+        if (!result.success) {
+            const firstError = result.error.issues[0]?.message ?? "Invalid input";
+            return toast.error(firstError);
+        }
+
         const { customAmount, ...cleaned } = data;
-        const formData = {...cleaned, amount: parseInt(data.amount) || parseInt(customAmount ?? "0") }
+        const formData = { ...cleaned, amount: parseInt(data.amount) || parseInt(customAmount ?? "0") }
 
         sendVoucher.mutate(formData, {
             onSuccess: (response) => {
