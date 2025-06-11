@@ -22,7 +22,10 @@ export const buildApp = (): FastifyInstance => {
 
     // Register CORS
     app.register(fastifyCors, {
-        origin: 'http://localhost:5173',
+        origin: [
+            'https://lipaworld.netlify.app',
+            'http://localhost:5173'
+        ],
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
     })

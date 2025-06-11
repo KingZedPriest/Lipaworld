@@ -2,9 +2,16 @@ import { DynamoDBClient, PutItemCommand, ScanCommand } from '@aws-sdk/client-dyn
 import { v4 as uuidv4 } from 'uuid';
 
 //Configs
-import { AWS_REGION, AWS_DYNAMO_TABLE_NAME } from '../config';
+import { AWS_REGION, AWS_DYNAMO_TABLE_NAME, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } from '../config';
 
-const db = new DynamoDBClient({ region: AWS_REGION })
+const db = new DynamoDBClient({
+  region: AWS_REGION,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!
+  }
+})
+
 const TABLE_NAME = AWS_DYNAMO_TABLE_NAME
 
 //Save Record to Database
