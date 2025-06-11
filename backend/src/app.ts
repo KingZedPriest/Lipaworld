@@ -20,7 +20,7 @@ export const buildApp = (): FastifyInstance => {
     //For the documentation
     setupSwagger(app);
 
-    // Register CORS
+    // CORS
     app.register(fastifyCors, {
         origin: [
             'https://lipaworld.netlify.app',
@@ -28,7 +28,12 @@ export const buildApp = (): FastifyInstance => {
         ],
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
-    })
+    });
+
+    // Handle preflight
+    app.options('*', (_req, res) => {
+        res.send();
+    });
 
     // Register routes and schemas
     for (const schema of [
