@@ -1,8 +1,12 @@
-import Fastify, { FastifyInstance, FastifyRequest, FastifyReply, FastifyError } from 'fastify';
+import Fastify, { FastifyInstance, FastifyError } from 'fastify';
 import fastifyCors from '@fastify/cors';
+
+//Routes
+import voucherRoutes from './routes/voucher.routes';
 
 //Schemas
 import { generalSchema } from './schemas/general.schema';
+import { voucherSchema } from './schemas/giftVoucher.schema';
 
 //Utils
 import { sendResponse } from './utils/response.utils';
@@ -26,9 +30,10 @@ export const buildApp = (): FastifyInstance => {
     // Register routes and schemas
     for (const schema of [
         ...generalSchema,
+        ...voucherSchema,
     ]) { app.addSchema(schema) }
 
-    // app.register(userRoutes, { prefix: '/v1/api/users' });
+    app.register(voucherRoutes, { prefix: '/v1/api/vouchers' });
 
     // Health Check Endpoint
     app.get('/healthcheck', async () => {

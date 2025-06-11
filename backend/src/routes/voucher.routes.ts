@@ -4,7 +4,7 @@ import { FastifyInstance } from "fastify";
 import { getRecipientVoucherHandler, giftVoucherHandler } from "../controllers/voucher.controller";
 
 //Schemas
-import { GetRecipientVoucherInput, voucherRef } from "../schemas/giftVoucher.schema";
+import { GetRecipientVoucherInput, VoucherInput, voucherRef } from "../schemas/giftVoucher.schema";
 import { generalRef } from "../schemas/general.schema";
 
 
@@ -12,7 +12,7 @@ import { generalRef } from "../schemas/general.schema";
 export default async function voucherRoutes(app: FastifyInstance) {
 
     //Gift Voucher
-    app.post<{ Body: VoucherApiData }>("/sendVoucher", {
+    app.post<{ Body: VoucherInput }>("/sendVoucher", {
         schema: {
             tags: ['Vouchers'],
             body: voucherRef('giftVoucherSchema'),

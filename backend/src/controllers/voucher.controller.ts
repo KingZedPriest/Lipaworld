@@ -13,7 +13,11 @@ import { publishVoucherGift } from "../sqs/producer";
 
 //Git a Voucher
 export const giftVoucherHandler = async (request: FastifyRequest<{ Body: VoucherInput }>, reply: FastifyReply) => {
+    
+    //Get Request Details
     const gift = request.body;
+
+    //Publish Voucher
     await publishVoucherGift(gift);
     return sendResponse(reply, 200, true, "Voucher queued successfully");
 };
