@@ -43,9 +43,11 @@ A backend simulation for Lipaworld's digital marketplace, allowing users to gift
 
 ### 🌐 Home Page
 - `http://localhost:5173/`
+- `https://lipaworld.netlify.app/`
 - 
 ### 🎁 Gift a Voucher
 - `http://localhost:5173/gift`
+- `https://lipaworld.netlify.app/gift`
 
 ---
 
@@ -60,9 +62,11 @@ cd backend
 yarn
 create a .env file, and add the following details or create yours and replace them accordingly
 PORT=3000
-AWS_REGION=us-east-1
-AWS_DYNAMO_TABLE_NAME=voucher
-AWS_SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/905418026306/GiftVoucher
+AWS_REGION=
+AWS_DYNAMO_TABLE_NAME=
+AWS_SQS_QUEUE_URL=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
 Start the backend server: yarn dev
 Run backend tests: yarn test
 Documentation: http://localhost:3000/documentation

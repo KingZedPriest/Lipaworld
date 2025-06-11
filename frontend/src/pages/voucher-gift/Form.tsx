@@ -51,7 +51,7 @@ export default function VoucherGiftForm() {
     const onSubmit = async (data: VoucherFormData) => {
 
         setIsSubmitting(true)
-        if (!data.amount || !data.customAmount) toast.error("Kindly enter an amount or select one.");
+        if (!data.amount || !data.customAmount) return toast.error("Kindly enter an amount or select one.");
         
         const { customAmount, ...cleaned } = data;
         const formData = {...cleaned, amount: parseInt(data.amount) || parseInt(customAmount ?? "0") }
