@@ -10,6 +10,6 @@ export const axiosInstance = axios.create({
 
 //Gift a User
 export const giftUserFn = async (data: VoucherApiData) => {
-    const response = await axiosInstance.post("gift/create", data);
+    const response = await axiosInstance.post("vouchers/sendVoucher", data);
     return response.data;
 };

@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-fox-toast";
 
-//Schemas
+//Schemas and Hooks
 import { voucherSchema, type VoucherFormData } from "@/schemas/voucher-gift.schema";
+import { useGiftUser } from "@/services/mutations.service";
 
 //Components
 import { Button } from "@/components/ui/button";
@@ -17,7 +19,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import Error from "@/components/error";
 
 //Icons
-import { Gift, DollarSquare, Message, Send2, Sms, Wallet1 } from "iconsax-react";
+import { Gift, DollarSquare, Message, Send2, Sms, Wallet1, Add } from "iconsax-react";
 
 
 const amountOptions = [
@@ -44,20 +46,29 @@ export default function VoucherGiftForm() {
 
     const selectedAmount = watch("amount")
 
+    //Functions
+    const sendVoucher = useGiftUser();
     const onSubmit = async (data: VoucherFormData) => {
-        setIsSubmitting(true)
 
-        console.log("the data", data)
-        try {
-            reset()
-            setShowCustomAmount(false)
-            toast.success("Voucher sent successfully! 🎉")
-        } catch (error) {
-            console.error("Failed to gift voucher:", error)
-            toast.error("Failed to send voucher. Please try again.")
-        } finally {
-            setIsSubmitting(false)
-        }
+        setIsSubmitting(true)
+        if (!data.amount || !data.customAmount) toast.error("Kindly enter an amount or select one.");
+        const formData = { ...data, amount: parseInt(data.amount) || parseInt(data.customAmount ?? "0") }
+
+        sendVoucher.mutate(formData, {
+            onSuccess: (response) => {
+                toast.success(response.message || "Voucher sent successfully! 🎉");
+                setIsSubmitting(false)
+                setShowCustomAmount(false)
+                reset()
+            },
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            onError: (error: any) => {
+                const message = error?.response?.data?.message || "Failed to send voucher. Please try again.";
+                toast.error(message, { isCloseBtn: true });
+                setIsSubmitting(false)
+                reset()
+            },
+        })
     }
 
     const handleAmountChange = (value: string) => {
@@ -69,7 +80,12 @@ export default function VoucherGiftForm() {
     }
 
     return (
-        <main className="flex justify-center items-center bg-gradient-to-br from-brand-blue/20 via-40% via-brand-blue/50 to-brand-green/30 p-2 h-dvh">
+        <main className="relative flex justify-center items-center bg-gradient-to-br from-brand-blue/20 via-40% via-brand-blue/50 to-brand-green/30 p-2 h-dvh">
+
+            <Link to="/" className="top-4 right-4 absolute place-items-center grid bg-slate-100 hover:bg-slate-200 rounded-full size-8 duration-300">
+                <Add className="text-red-400 hover:text-600 rotate-45" />
+            </Link>
+
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full max-w-xl">
                 <Card className="bg-white/95 border border-brand-blue/10">
                     <CardHeader className="pb-6 text-center">
