@@ -52,7 +52,9 @@ export default function VoucherGiftForm() {
 
         setIsSubmitting(true)
         if (!data.amount || !data.customAmount) toast.error("Kindly enter an amount or select one.");
-        const formData = { ...data, amount: parseInt(data.amount) || parseInt(data.customAmount ?? "0") }
+        
+        const { customAmount, ...cleaned } = data;
+        const formData = {...cleaned, amount: parseInt(data.amount) || parseInt(customAmount ?? "0") }
 
         sendVoucher.mutate(formData, {
             onSuccess: (response) => {
