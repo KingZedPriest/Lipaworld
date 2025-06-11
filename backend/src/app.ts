@@ -1,4 +1,3 @@
-// app.ts
 import Fastify, { FastifyInstance, FastifyError } from 'fastify';
 import fastifyCors from '@fastify/cors';
 
@@ -11,23 +10,25 @@ import { voucherSchema } from './schemas/giftVoucher.schema';
 
 //Utils
 import { sendResponse } from './utils/response.utils';
-import { setupSwagger } from './utils/swagger'; // Assuming setupSwagger takes the app instance
+import { setupSwagger } from './utils/swagger';
 
-// Export a function that CREATES and configures the Fastify instance
+export const app: FastifyInstance = Fastify({ logger: { level: 'info' }, trustProxy: 3 });
+
+// Build the Fastify app
 export const buildApp = (): FastifyInstance => {
 
-    // Create the Fastify instance 
-    const app: FastifyInstance = Fastify({ logger: { level: 'info' }, trustProxy: 3 });
-
-    // For the documentation
+    //For the documentation
     setupSwagger(app);
 
     // CORS
     app.register(fastifyCors, {
-        origin: true,
+        origin: [
+            'https://lipaworld.netlify.app',
+            'http://localhost:5173'
+        ],
         credentials: true,
-        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
     });
+
 
     // Register routes and schemas
     for (const schema of [
@@ -49,5 +50,5 @@ export const buildApp = (): FastifyInstance => {
         return sendResponse(reply, 500, false, error.message);
     });
 
-    return app; // Return the configured instance
-};
+    return app;
+}
