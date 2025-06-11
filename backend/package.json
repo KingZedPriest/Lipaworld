@@ -14,7 +14,7 @@
   "name": "lipaworld",
   "version": "1.0.0",
   "description": "Lipaworld voucher gifting backend",
-  "main": "dist/server.js",
+  "main": "dist/src/server.js",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.149",
     "@types/node": "^24.0.0",
@@ -25,7 +25,7 @@
   },
   "scripts": {
     "build": "yarn && tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "dev": "tsnd --respawn --transpile-only --exit-child src/server.ts",
     "lint": "eslint --ext .js,.ts .",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
