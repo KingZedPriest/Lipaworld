@@ -15,14 +15,14 @@ import { setupSwagger } from './utils/swagger'; // Assuming setupSwagger takes t
 
 // Export a function that CREATES and configures the Fastify instance
 export const buildApp = (): FastifyInstance => {
-    
-    // Create the Fastify instance INSIDE the function
+
+    // Create the Fastify instance 
     const app: FastifyInstance = Fastify({ logger: { level: 'info' }, trustProxy: 3 });
 
     // For the documentation
     setupSwagger(app);
 
-    // CORS - now guaranteed to be registered only once per app instance
+    // CORS
     app.register(fastifyCors, {
         origin: true,
         credentials: true,
