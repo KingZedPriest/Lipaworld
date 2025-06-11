@@ -1,3 +1,4 @@
+// app.ts
 import Fastify, { FastifyInstance, FastifyError } from 'fastify';
 import fastifyCors from '@fastify/cors';
 
@@ -10,17 +11,18 @@ import { voucherSchema } from './schemas/giftVoucher.schema';
 
 //Utils
 import { sendResponse } from './utils/response.utils';
-import { setupSwagger } from './utils/swagger';
+import { setupSwagger } from './utils/swagger'; // Assuming setupSwagger takes the app instance
 
-export const app: FastifyInstance = Fastify({ logger: { level: 'info' }, trustProxy: 3 });
-
-// Build the Fastify app
+// Export a function that CREATES and configures the Fastify instance
 export const buildApp = (): FastifyInstance => {
+    
+    // Create the Fastify instance INSIDE the function
+    const app: FastifyInstance = Fastify({ logger: { level: 'info' }, trustProxy: 3 });
 
-    //For the documentation
+    // For the documentation
     setupSwagger(app);
 
-    // CORS
+    // CORS - now guaranteed to be registered only once per app instance
     app.register(fastifyCors, {
         origin: true,
         credentials: true,
@@ -47,5 +49,5 @@ export const buildApp = (): FastifyInstance => {
         return sendResponse(reply, 500, false, error.message);
     });
 
-    return app;
-}
+    return app; // Return the configured instance
+};
