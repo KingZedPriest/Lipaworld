@@ -33,5 +33,6 @@ export const getRecipientVoucherHandler = async (request: FastifyRequest<{ Query
 
     //Fetch recipient vouchers and return
     const data = await getVouchersByRecipient(recipient);
+    console.log("The data", data)
     return sendResponse(reply, 200, true, "Vouchers was fetched successfully", data);
 }

@@ -41,12 +41,9 @@ const giftVoucherSchemaWithMeta = giftVoucherSchema.extend({
 
 //Get Recipient Voucher Response Schema
 const giftVoucherResponseSchema = responseCore({ status: 200, success: true }).extend({
-    data: z.array(
-        z.object({
-            giftVoucherSchemaWithMeta
-        })
-    )
+  data: z.array(giftVoucherSchemaWithMeta)
 })
+
 
 
 export type GetRecipientVoucherInput = z.infer<typeof getRecipientVoucherSchema>;
